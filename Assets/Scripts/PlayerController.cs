@@ -71,9 +71,12 @@ public class PlayerController : MonoBehaviour
         worldPosition.z = 0;
         worldPosition -= (transform.position + new Vector3(0, -0.5f, 0));
 
-        GameObject newBullet = Instantiate<GameObject>(bulletPrefab);
-        newBullet.transform.position = transform.position + new Vector3(0, -0.5f);
-        newBullet.GetComponent<Bullet>().Direction = new Vector2(1, 0);
+        GameObject newBullet = GetComponent<ObjectPool>().Get();
+        if(newBullet!=null){
+            newBullet.transform.position = transform.position + new Vector3(0, -0.5f);
+            newBullet.GetComponent<Bullet>().Direction = worldPosition;
+        }
+        
     }
 
     public void FixedUpdate()

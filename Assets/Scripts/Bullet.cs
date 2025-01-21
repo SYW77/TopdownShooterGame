@@ -32,7 +32,7 @@ public class Bullet : MonoBehaviour
     {
         if (collision.tag == "Wall")
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }
