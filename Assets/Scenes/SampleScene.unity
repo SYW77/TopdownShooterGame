@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 278050977}
   m_Layer: 0
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6339,7 +6339,7 @@ GameObject:
   - component: {fileID: 1734178388}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6425,6 +6425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 8
+  bulletPrefab: {fileID: 6346292817089642739, guid: 19e5b2d3f4643ca4b9e4bd4785972a66, type: 3}
 --- !u!50 &1734178386
 Rigidbody2D:
   serializedVersion: 4

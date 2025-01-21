@@ -6,6 +6,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 3;
+    public GameObject bulletPrefab;
+
     Vector3 move;
 
     // Start is called before the first frame update
@@ -56,6 +58,22 @@ public class PlayerController : MonoBehaviour
         {
             GetComponent<Animator>().SetTrigger("Stop");
         }
+
+        if (Input.GetMouseButton(0))
+        {
+            Shoot();
+        }
+    }
+
+    void Shoot()
+    {
+        Vector3 worldPosition=Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        worldPosition.z = 0;
+        worldPosition -= (transform.position + new Vector3(0, -0.5f, 0));
+
+        GameObject newBullet = Instantiate<GameObject>(bulletPrefab);
+        newBullet.transform.position = transform.position + new Vector3(0, -0.5f);
+        newBullet.GetComponent<Bullet>().Direction = new Vector2(1, 0);
     }
 
     public void FixedUpdate()
