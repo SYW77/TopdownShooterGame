@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
             GetComponent<Animator>().SetTrigger("Stop");
         }
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
             Shoot();
         }

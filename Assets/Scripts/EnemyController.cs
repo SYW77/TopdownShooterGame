@@ -13,14 +13,32 @@ public class EnemyController : MonoBehaviour
 
     public float speed = 2;
 
+    public Material flashMaterial;
+    public Material defaultMaterial;
+
     GameObject target;
     State state;
 
     // Start is called before the first frame update
     void Start()
     {
-        target = GameObject.Find("Player");
+    }
+
+    public void Spawn(GameObject target)
+    {
+        this.target = target;
+        state = State.Spawning;
+        GetComponent<Character>().Initialize();
+        GetComponent<Animator>().SetTrigger("Spawn");
+        Invoke("StartMoving", 1);
+        GetComponent<Collider2D>().enabled = false;
+    }
+
+    void StartMoving()
+    {
+        GetComponent<Collider2D>().enabled = true;
         state = State.Moving;
+
     }
 
     private void FixedUpdate()
@@ -28,6 +46,7 @@ public class EnemyController : MonoBehaviour
         if (state == State.Moving)
         {
             Vector2 direction = target.transform.position - transform.position;
+
             transform.Translate(direction.normalized * speed * Time.fixedDeltaTime);
 
             if (direction.x < 0)
@@ -49,7 +68,8 @@ public class EnemyController : MonoBehaviour
 
             if (GetComponent<Character>().Hit(d))
             {
-
+                //살아있을 때
+                Flash();
             }
             else
             {
@@ -57,6 +77,17 @@ public class EnemyController : MonoBehaviour
                 Die();
             }
         }
+    }
+
+    void Flash()
+    {
+        GetComponent<SpriteRenderer>().material = flashMaterial;
+        Invoke("AfterFlash", 0.5f);
+    }
+
+    void AfterFlash()
+    {
+        GetComponent<SpriteRenderer>().material = defaultMaterial;
     }
 
     void Die()
@@ -68,6 +99,6 @@ public class EnemyController : MonoBehaviour
 
     void AfterDying()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }
