@@ -8,6 +8,9 @@ public class PlayerController : MonoBehaviour
     public float speed = 3;
     public GameObject bulletPrefab;
 
+    public Material flashMaterial;
+    public Material defaultMaterial;
+
     Vector3 move;
 
     // Start is called before the first frame update
@@ -82,5 +85,42 @@ public class PlayerController : MonoBehaviour
     public void FixedUpdate()
     {
         transform.Translate(move * speed * Time.fixedDeltaTime);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            if (GetComponent<Character>().Hit(1))
+            {
+                Flash();
+            }
+            else
+            {
+                Die();
+            }
+        }
+    }
+
+    void Flash()
+    {
+        GetComponent<SpriteRenderer>().material = flashMaterial;
+        Invoke("AfterFlash", 0.5f);
+    }
+
+    void AfterFlash()
+    {
+        GetComponent<SpriteRenderer>().material = defaultMaterial;
+    }
+
+    void Die()
+    {
+        GetComponent<Animator>().SetTrigger("Die");
+        Invoke("AfterDying", 1.4f);
+    }
+
+    void AfterDying()
+    {
+        gameObject.SetActive(false);
     }
 }
