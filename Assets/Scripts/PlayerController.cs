@@ -116,11 +116,11 @@ public class PlayerController : MonoBehaviour
     void Die()
     {
         GetComponent<Animator>().SetTrigger("Die");
-        Invoke("AfterDying", 1.4f);
+        Invoke("AfterDying", 0.875f);
     }
 
     void AfterDying()
     {
-        gameObject.SetActive(false);
+     //   gameObject.SetActive(false);
     }
 }
