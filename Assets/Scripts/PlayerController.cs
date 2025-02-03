@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -121,6 +122,6 @@ public class PlayerController : MonoBehaviour
 
     void AfterDying()
     {
-     //   gameObject.SetActive(false);
+        SceneManager.LoadScene("GameOverScene");
     }
 }
