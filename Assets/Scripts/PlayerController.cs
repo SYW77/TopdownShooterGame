@@ -12,6 +12,10 @@ public class PlayerController : MonoBehaviour
     public Material flashMaterial;
     public Material defaultMaterial;
 
+    public AudioClip shotSound;
+    public AudioClip hitSound;
+    public AudioClip deadSound;
+
     Vector3 move;
 
     // Start is called before the first frame update
@@ -71,6 +75,8 @@ public class PlayerController : MonoBehaviour
 
     void Shoot()
     {
+        GetComponent<AudioSource>().PlayOneShot(shotSound);
+
         Vector3 worldPosition=Camera.main.ScreenToWorldPoint(Input.mousePosition);
         worldPosition.z = 0;
         worldPosition -= (transform.position + new Vector3(0, -0.5f, 0));
@@ -94,10 +100,12 @@ public class PlayerController : MonoBehaviour
         {
             if (GetComponent<Character>().Hit(1))
             {
+                GetComponent<AudioSource>().PlayOneShot(hitSound);
                 Flash();
             }
             else
             {
+                GetComponent<AudioSource>().PlayOneShot(deadSound);
                 Die();
             }
         }
