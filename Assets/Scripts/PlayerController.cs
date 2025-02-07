@@ -17,12 +17,7 @@ public class PlayerController : MonoBehaviour
     public AudioClip deadSound;
 
     Vector3 move;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    Dictionary<Collider2D, Coroutine> damageCoroutines = new Dictionary<Collider2D, Coroutine>();
 
     // Update is called once per frame
     void Update()
@@ -98,6 +93,30 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
+            if (!damageCoroutines.ContainsKey(collision.collider))
+            {
+                Coroutine damageRoutine = StartCoroutine(DamageOverTime(collision.collider));
+                damageCoroutines[collision.collider] = damageRoutine;
+            }
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            if (damageCoroutines.ContainsKey(collision.collider))
+            {
+                StopCoroutine(damageCoroutines[collision.collider]);
+                damageCoroutines.Remove(collision.collider);
+            }
+        }
+    }
+
+    private IEnumerator DamageOverTime(Collider2D enemy)
+    {
+        while (true)
+        {
             if (GetComponent<Character>().Hit(1))
             {
                 GetComponent<AudioSource>().PlayOneShot(hitSound);
@@ -107,7 +126,9 @@ public class PlayerController : MonoBehaviour
             {
                 GetComponent<AudioSource>().PlayOneShot(deadSound);
                 Die();
+                yield break; // 플레이어가 죽으면 코루틴 종료
             }
+            yield return new WaitForSeconds(1.0f); // 1초마다 데미지
         }
     }
 
