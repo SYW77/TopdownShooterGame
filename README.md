@@ -24,4 +24,6 @@ This game is about avoiding enemy attacks that are generated and killing enemies
 ## 📖References / Sources
 [초급/유니티 튜토리얼] 유니티로 처음 게임을 만들어보기 (https://youtu.be/hgDquKjtA-I?si=x0zCvyC091Wdc2ui)<br>
 Tech Dungeon: Roguelite (https://trevor-pupkin.itch.io/tech-dungeon-roguelite)<br>
-Minimal Dungeon (https://trevor-pupkin.itch.io/minimal-dungeon)
+Minimal Dungeon (https://trevor-pupkin.itch.io/minimal-dungeon)<br>
+<br>
+I don't claim any rights to this, as I made it by watching tutorial videos, except for my own updates.
