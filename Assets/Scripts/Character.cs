@@ -8,6 +8,7 @@ public class Character : MonoBehaviour
     public GameObject HPGauge;
     float HP;
     float HPMaxWidth;
+    public bool isAttackable = false;
 
     // Start is called before the first frame update
     void Start()
@@ -18,11 +19,15 @@ public class Character : MonoBehaviour
         {
             HPMaxWidth = HPGauge.GetComponent<RectTransform>().sizeDelta.x;
         }
+
+        StartCoroutine(EnableAttackAfterDelay());
     }
 
     public void Initialize()
     {
         HP = MaxHP;
+        isAttackable = false;
+        StartCoroutine(EnableAttackAfterDelay());
     }
 
     /*
@@ -44,5 +49,11 @@ public class Character : MonoBehaviour
         }
 
         return HP > 0;
+    }
+
+    private IEnumerator EnableAttackAfterDelay()
+    {
+        yield return new WaitForSeconds(1f);
+        isAttackable = true;
     }
 }
