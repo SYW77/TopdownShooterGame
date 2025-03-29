@@ -93,13 +93,19 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            if (!damageCoroutines.ContainsKey(collision.collider))
+            Character enemyCharacter = collision.gameObject.GetComponent<Character>();
+
+            if (enemyCharacter != null && enemyCharacter.isAttackable) // ?? 특정 Enemy가 공격 가능할 때만 피격
             {
-                Coroutine damageRoutine = StartCoroutine(DamageOverTime(collision.collider));
-                damageCoroutines[collision.collider] = damageRoutine;
+                if (!damageCoroutines.ContainsKey(collision.collider))
+                {
+                    Coroutine damageRoutine = StartCoroutine(DamageOverTime(collision.collider));
+                    damageCoroutines[collision.collider] = damageRoutine;
+                }
             }
         }
     }
+
 
     private void OnCollisionExit2D(Collision2D collision)
     {
