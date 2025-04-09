@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static float finalScore = 0f;
+
     public GameObject player;
     public float spawnTerm = 5;
     public float fasterEverySpawn = 0.05f;
@@ -43,6 +45,7 @@ public class GameManager : MonoBehaviour
         scoreText.text = ((int)score).ToString();
     }
 
+
     void SpawnEnemy()
     {
         float x = Random.Range(-10f, 10f);
@@ -52,4 +55,10 @@ public class GameManager : MonoBehaviour
         obj.transform.position = new Vector3(x, y, 0);
         obj.GetComponent<EnemyController>().Spawn(player);
     }
+
+    public void SaveFinalScore()
+    {
+        finalScore = score;  // 현재 점수를 static 변수에 저장
+    }
+
 }

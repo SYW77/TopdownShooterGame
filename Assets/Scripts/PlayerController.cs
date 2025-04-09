@@ -151,6 +151,9 @@ public class PlayerController : MonoBehaviour
 
     void Die()
     {
+        // 점수 저장
+        FindObjectOfType<GameManager>().SaveFinalScore();
+
         GetComponent<Animator>().SetTrigger("Die");
         Invoke("AfterDying", 0.875f);
     }
