@@ -92,8 +92,18 @@ public class EnemyController : MonoBehaviour
 
     void AfterFlash()
     {
-        GetComponent<SpriteRenderer>().material = defaultMaterial;
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        sr.material = defaultMaterial;
+
+        // 알파값을 강제로 1로 설정
+        if (sr.material.HasProperty("_Color"))
+        {
+            Color color = sr.material.color;
+            color.a = 1f;
+            sr.material.color = color;
+        }
     }
+
 
     void Die()
     {
