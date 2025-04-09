@@ -17,9 +17,10 @@ This game is about avoiding enemy attacks that are generated and killing enemies
 ## 🧑‍💻My Own Update
 1. Allows continuous damage to be taken while in contact with the enemy.
 2. Makes enemies unable to damage player for 1 second after spawning.
+3. Add final score display on Game Over screen.
 
 ## 📝Updates Planned
-1. Display score on game over screen
+1. Display highest record on game over screen
 
 ## 📖References / Sources
 [초급/유니티 튜토리얼] 유니티로 처음 게임을 만들어보기 (https://youtu.be/hgDquKjtA-I?si=x0zCvyC091Wdc2ui)<br>
